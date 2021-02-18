@@ -51,60 +51,43 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <form className="d-flex flex-column">
-                    <h3>Sign Up</h3>
-
-                    <div className="form-group">
-                        <label>First name</label>
-                        <input type="text" className="form-control" placeholder="First name" name="first_name"
-                            value={this.state.first_name}
+            <div id="login-box">
+            <div class="left">
+              <h1>Sign up</h1>
+              
+              <input type="text" name="first_name" placeholder="First Name"
+				value={this.state.first_name}
                             onChange={(e) => this.handleChange({ first_name: e.target.value })}
-
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Last name</label>
-                        <input type="text" className="form-control" placeholder="Last name" name="last_name"
-                            value={this.state.last_name}
-                            onChange={(e) => this.handleChange({ last_name: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Email address</label>
-                        <input type="email" className="form-control" placeholder="Enter email" name="email"
-                            value={this.state.email}
-                            onChange={(e) => this.handleChange({ email: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Phone</label>
-                        <input type="text" className="form-control" placeholder="Phone" name="phone"
-                            value={this.state.phone}
-                            onChange={(e) => this.handleChange({ phone: e.target.value })}
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input type="password" className="form-control" name="password" placeholder="Enter password"
+				/>
+              <input type="text" name="last_name" placeholder="Last Name" 
+			   value={this.state.last_name}
+                            onChange={(e) => this.handleChange({ last_name: e.target.value })}/>
+              <input type="text" name="email" placeholder="E-mail" 
+			  value={this.state.email}
+                            onChange={(e) => this.handleChange({ email: e.target.value })}/>
+              <input type="text" name="phone" placeholder="Phone" 
+			   value={this.state.phone}
+                            onChange={(e) => this.handleChange({ phone: e.target.value })}/>
+              <input type="password" name="Password" placeholder="Password" 
+			  
                             value={this.state.password}
-                            onChange={(e) => this.handleChange({ password: e.target.value })}
-                        />
-                    </div>
-
-                    <button className="btn btn-primary btn-block" type='button' onClick={(e) => this.create(e)}>
-                        Sign Up
-                </button>
-
-                    <p className="forgot-password text-right">
-                        Already registered <a href="/Login">sign in?</a>
-                    </p>
-                </form>
+                            onChange={(e) => this.handleChange({ password: e.target.value })}/>
+              
+              
+              <input type="submit" name="signup_submit"  value="Sign up" onClick={(e) => this.create(e)}/>
             </div>
+            
+            <div class="right">
+              <span class="loginwith">Sign in with<br />social network</span>
+              
+              <button class="social-signin facebook">Log in with facebook</button>
+              <button class="social-signin twitter">Log in with Twitter</button>
+              <button class="social-signin google">Log in with Google+</button>
+            </div>
+            <div class="or">OR</div>
+          </div>
+		
+		
         );
     }
 }
