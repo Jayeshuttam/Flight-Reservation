@@ -49,7 +49,6 @@ exports.login = function (req, res, next) {
   })
 }
 
-
 exports.signup = function (req, res) {
   var payload = {
     message: "user can not save",
@@ -75,6 +74,7 @@ exports.signup = function (req, res) {
     let password = body.password;
     let phone = body.phone;
 
+
     new Promise(function (resolve, reject) {
 
       var hash = crypto.createHash('md5').update(email).digest('hex');
@@ -90,15 +90,27 @@ exports.signup = function (req, res) {
         'token': hash
       },
         function (err, result) {
-          if (err) reject(err);
-          else resolve(res);
+          if (err) {
+            reject(err);
+
+          }
+          else {
+            console.log("Email=>", email);
+            resolve(result);
+          }
         }
       );
-    }).then((response) => {
+    }).then((body) => {
 
-      User.find({ 'email': email }, { _id: false, password: false }, function (err, result) {
+      User.find({ 'email': body.email }, { _id: false, password: false }, function (err, result) {
         if (err) {
           throw err;
+        }
+        else {
+          console.log("Incoming inputs => email =>", body.email);
+          if (sendVerifyLink(body.email, body.token, 'Verify') == true) {
+            res.send(result);
+          }
         }
 
         // try to send payload
@@ -114,10 +126,12 @@ exports.signup = function (req, res) {
   });
 
 }
+
 let email = '';
 exports.forgot = function (req, res) {
   email = req.body.email;
-  sendResetLink(email);
+  action = "ChangePassword"
+  sendResetLink(email, action);
 }
 
 exports.emailVerify = function (req, res) {
@@ -179,7 +193,7 @@ exports.ChangePassword = function (req, res, next) {
 
 
 
-function sendResetLink(email) {
+function sendResetLink(email, action) {
   var sender_email = 'jayeshuttam7844@gmail.com';
   var password = 'programmer@jayesh7844'
   var transporter = nodemailer.createTransport({
@@ -194,7 +208,7 @@ function sendResetLink(email) {
     from: sender_email,
     to: email,
     subject: ' flight reservation system',
-    text: ' Hii from flight reservation system That was easy!  here is the link to reset http://localhost:3000/ChangePassword:'
+    text: ' Hii from flight reservation system That was easy!  here is the link to reset http://localhost:3000/' + action,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -204,4 +218,37 @@ function sendResetLink(email) {
       console.log('Email sent: ' + info.response);
     }
   });
+  return console.log("Link sent to the Email");
+}
+
+function sendVerifyLink(email, token, action) {
+
+  console.log("email=>", email);
+  var sender_email = 'jayeshuttam7844@gmail.com';
+  var password = 'programmer@jayesh7844'
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: sender_email,
+      pass: password
+    }
+  });
+
+  var mailOptions = {
+    from: sender_email,
+    to: email,
+    subject: ' flight reservation system',
+    text: ' Hii from flight reservation system That was easy!  here is the link to verify http://localhost:3000/' + action + '?token=' + token,
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      return true;
+    }
+  });
+
+
 }

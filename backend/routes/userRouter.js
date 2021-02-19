@@ -63,6 +63,7 @@ router.post("/users/signup_verify", userConteroller.signup);
 router.post("/users/login_verify", userConteroller.login);
 router.post("/forgot", userConteroller.forgot);
 router.post('/changepassword', userConteroller.ChangePassword);
+router.post('/Verify', userConteroller.emailVerify)
 
 
 
