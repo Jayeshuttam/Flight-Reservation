@@ -53,7 +53,6 @@ user_schema.pre('save', function (next) {
 
 
 user_schema.statics.authenticate = function (email_input, password, callback) {
-    console.log("success 14");
     User.findOne({ 'email': email_input }).exec(function (err, user) {
         if (err) {
             return callback(err);
@@ -62,12 +61,8 @@ user_schema.statics.authenticate = function (email_input, password, callback) {
             err.status = 401;
             return callback(err);
         }
-        else {
-            console.log("Success");
-        }
         bcrypt.compare(password, user.password, function (err, result) {
             if (result === true) {
-                console.log("Here");
                 return callback(null, user);
             } else {
                 return callback();
