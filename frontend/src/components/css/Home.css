@@ -42,14 +42,23 @@ header {
     text-decoration: underline;
 }
 
+
 footer {
-    position: relative;
+    position: absolute;
     bottom: 0;
     height: 80px;
     background-color: rgb(63, 61, 61);
     width: 100%;
     margin-bottom: 5px;
     color: white;
+}
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 90px;
 }
 
 .content{
@@ -62,8 +71,7 @@ footer {
     font-weight: 600;
     font-size: 28px;
     color: rgb(22, 18, 18);
-    padding-bottom: 50px;
-   
+    padding-bottom: 20px;   
 }
 
 .container h1{   
@@ -141,4 +149,40 @@ td{
 .container .radiobtn{
     font-size: 18px;
     color: #8c5d28;
+}
+
+.homeContent{
+    margin-top: 25px;
+    
+}
+
+.homeContent h2{
+    color:rgb(22, 21, 21);
+    font-weight: 700;
+    font-size: 40px;
+    margin-bottom: 20px;    
+}
+
+.homeContent p{
+    font-size: 18px;
+    font-weight: 500; 
+    text-align: justify;
+}
+
+.homeContent .aboutContent{
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+
+.homeContent .review{
+    width: 50%;
+    float: right;
+    padding: 10px;
+}
+
+.homeContent .submitReview{
+    background-color: wheat;
+    font-size: 22px;
+    margin-left: 10px;
 }

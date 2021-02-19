@@ -20,7 +20,7 @@ export default class Home extends Component{
                      style={{
                         backgroundImage: 'url('+Image+')',
                         backgroundSize: "cover",
-                        height: "150vh",
+                        height: "170vh",
                         color: "#f5f5f5"
                       }}
                     >
@@ -117,7 +117,46 @@ export default class Home extends Component{
                             </table>
                            
                         </div>
-               
+                        <div class="homeContent">
+                          <div class="aboutContent">
+                            <h2>Book Your Next Trip with Us!</h2>
+                            <p>
+                                    Need to get away? Do it for less with us. Our travel experts work with more than 400 airlines worldwide to track down
+                                    low prices for our customers. This Spring, we’re bringing you even more fares that we’ve worked hard to ensure will be easy on your wallet.
+                                    Whatever your budget for traveling, book your tickets on us with confidence that you’re getting a great deal! 
+                                    With vast experience and knowledge of the industry, we promise to give you the best advice.
+                                    We carefully handpick flights and guides to offer you the top-quality services. <br /><br />
+                                    We provide value added services, excellent custom services 24/7 and pay keen attention to details. We pride ourselves in our fast response 
+                                    rate and happy customers’ track record. We go extra miles to make yours a most uniquely personal travel experience. <br /><br />
+                                    Travel solo or in a group, on a shoestring budget or in luxury, we will make it the most pleasant travel experience of your life.
+                                     We customize your vacation so that you don’t miss anything and have a perfect trip.
+                            </p>
+                            </div>
+                            <div class="review">
+                                <h2>User Reviews</h2>
+                                <p>
+                                    <span>&#11088;</span> <span>&#11088;</span> <span>&#11088;</span><span>&#11088;</span>
+                                    Helped Me a lot <br/>
+                                    The agent very nice help me with my rebooking -
+                               <em>
+                                        <strong>Manjit Singh</strong>   
+                                        &nbsp; jan 20, 2021
+                               </em>
+  
+                                </p><br />
+                                <p>
+                                    <span>&#11088;</span> <span>&#11088;</span> <span>&#11088;</span><span>&#11088;</span><span>&#11088;</span>
+                                    Very happy<br />
+                                    Fantastic, painless and quickly resolved flight change due to covid. Very happy with the service - 
+                                    <em>
+                                        <strong>Prabhjot</strong>
+                                        &nbsp; Dec 23, 2020
+                                    </em>
+                                 
+                                </p>
+                            </div>
+                            <button class="submitReview">Submit Review</button>
+                        </div>
                     </div>
             </body>
        
