@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './css/SignUp.css';
 import { Redirect, Switch } from 'react-router-dom';
+
 export default class SignUp extends Component {
     constructor(props) {
         super(props);
