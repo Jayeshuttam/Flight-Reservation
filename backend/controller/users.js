@@ -6,26 +6,47 @@ var nodemailer = require('nodemailer');
 var crypto = require('crypto');
 
 exports.login = function (req, res, next) {
-  let email_input = req.body.email;
-  let password = req.body.password;
-  console.log("Incoming inputs => email =>", email_input, " Password => ", password);
+  let body = '';
   new Promise(function (resolve, reject) {
-    _this = req;
-    _that = res;
-
-    User.authenticate(email_input, password, function (error, user) {
-      if (error || !user) {
-        var err = new Error('Wrong email or password.');
-        err.status = 401;
-        return next(err);
-      } else {
-
-        console.log("uSER ID =>", user._id)
-        return _that.redirect('/Home');
-      }
+    req.on('data', chunk => {
+      body += chunk.toString(); // convert Buffer to string
+      resolve(JSON.parse(body))
     });
-  });
+    /*req.on('end', () => {
+      resolve(JSON.parse(body))
+    });*/
 
+  }).then(function (body) {
+
+    let email_input = body.email;
+    let password = body.password;
+    console.log("Incoming inputs => email =>", email_input, " Password => ", password);
+    new Promise(function (resolve, reject) {
+      _this = req;
+      _that = res;
+
+      User.authenticate(email_input, password, function (error, user) {
+        if (error || !user) {
+          console.log("error=>", error);
+          var err = new Error('Wrong email or password.');
+          err.status = 401;
+          reject(err);
+        } else {
+          resolve(user)
+        }
+      });
+    }).then((user) => {
+      console.log("then=>", user)
+      res.send(user);
+    }).catch((err) => {
+      console.log("error=>", err)
+      res.send(err);
+      res.end("error");
+    })
+  }).catch((e) => {
+    res.send("error");
+    res.end("error");
+  })
 }
 
 
