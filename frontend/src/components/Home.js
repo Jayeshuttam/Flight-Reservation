@@ -155,6 +155,7 @@ export default class Home extends Component{
                                  
                                 </p>
                             </div>
+                            <input type="textarea" class="submitReview" name="review"></input>
                             <button class="submitReview">Submit Review</button>
                         </div>
                     </div>
