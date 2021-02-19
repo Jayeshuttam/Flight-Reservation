@@ -12,6 +12,8 @@ export default class Login extends Component{
           <input type="password" name="password" placeholder="Password" />
              
           <input type="submit" name="signup_submit" value="Log in" />
+          <br/><br/>
+                    <a href="/ResetPassword">Forget Password?</a>
         </div>
         
         <div class="right">

@@ -80,8 +80,7 @@ export default class SignUp extends Component {
                         onChange={(e) => this.handleChange({ password: e.target.value })} />
 
 
-                    <input type="submit" name="signup_submit" value="Sign up" onClick={(e) => this.create(e)} /><br/>
-                    <a href="/ResetPassword">Forget Password?</a>
+                    <input type="submit" name="signup_submit" value="Sign up" onClick={(e) => this.create(e)} />
                 </div>
 
                 <div class="right">
