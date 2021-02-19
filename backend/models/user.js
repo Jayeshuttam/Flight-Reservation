@@ -1,69 +1,82 @@
 
-var mongoose=require("../mongo_db");
-var bcrypt=require('bcrypt');
-var Schema=mongoose.Schema;
+var mongoose = require("../mongo_db");
+var bcrypt = require('bcrypt');
+var Schema = mongoose.Schema;
 
-var user_schema=new Schema({
-    first_name:{
-        type:String,
-        required:true},
-    last_Name:{
-        type:String,
-        required:true},
-    phone:{
-        type:Number,
-        required:true},
-    email:{
-        type:String,
-        required:true,
-        unique:true},
-    password:{
-        type:String,
-        minLength:8,
-        maxLength:16},
-    
+var user_schema = new Schema({
+    first_name: {
+        type: String,
+        required: true
+    },
+    last_Name: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: Number,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        minLength: 8,
+        maxLength: 16
+    },
+
+    status: {
+        enum: [0, 1],
+        default: 0
+    },
+    token: {
+        type: String,
+
+    }
+
 })
 
-user_schema.pre('save',function(next){
-    var user=this;
-    bcrypt.hash(user.password,10,function(err,hash){
-        if(err){
+user_schema.pre('save', function (next) {
+    var user = this;
+    bcrypt.hash(user.password, 10, function (err, hash) {
+        if (err) {
             return next(err);
 
         }
-        user.password=hash;
+        user.password = hash;
         next();
     });
 });
 
 
 
-user_schema.statics.authenticate=function(email_input,password,callback){
+user_schema.statics.authenticate = function (email_input, password, callback) {
     console.log("success 14");
-    User.findOne({'email':email_input}).exec(function(err,user){
-        if(err){
+    User.findOne({ 'email': email_input }).exec(function (err, user) {
+        if (err) {
             return callback(err);
-        }else if (!user )
-        {
-            var err=new Error('User not Found');
-            err.status=401;
+        } else if (!user) {
+            var err = new Error('User not Found');
+            err.status = 401;
             return callback(err);
         }
-        else{
+        else {
             console.log("Success");
         }
-        bcrypt.compare(password,user.password,function(err,result){
-            if(result===true){
+        bcrypt.compare(password, user.password, function (err, result) {
+            if (result === true) {
                 console.log("Here");
-                return callback(null,user);
-            }else{
+                return callback(null, user);
+            } else {
                 return callback();
             }
         })
-        
+
     });
-    
+
 }
 
-var User=mongoose.model("Users",user_schema);
-module.exports=User;
+var User = mongoose.model("Users", user_schema);
+module.exports = User;

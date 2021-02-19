@@ -3,6 +3,8 @@ var bodyParser = require('body-parser');
 const { func } = require("prop-types");
 var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
+var crypto = require('crypto');
+
 exports.login = function (req, res, next) {
   let email_input = req.body.email;
   let password = req.body.password;
@@ -54,10 +56,23 @@ exports.signup = function (req, res) {
 
     new Promise(function (resolve, reject) {
 
-      User.create({ 'first_name': first_name, 'last_Name': last_Name, 'phone': phone, 'email': email, 'password': password }, function (err, result) {
-        if (err) reject(err);
-        else resolve(res);
-      });
+      var hash = crypto.createHash('md5').update(email).digest('hex');
+      console.log(hash); // 9b74c9897bac770ffc029102a200c5de
+
+      User.create({
+        'first_name': first_name,
+        'last_Name': last_Name,
+        'phone': phone,
+        'email': email,
+        'password': password,
+        'status': 0,
+        'token': hash
+      },
+        function (err, result) {
+          if (err) reject(err);
+          else resolve(res);
+        }
+      );
     }).then((response) => {
 
       User.find({ 'email': email }, { _id: false, password: false }, function (err, result) {
@@ -83,6 +98,28 @@ exports.forgot = function (req, res) {
   email = req.body.email;
   sendResetLink(email);
 }
+
+exports.emailVerify = function (req, res) {
+  let token = req.params.token;
+  new Promise(function (resolve, reject) {
+    User.findOne({ 'token': token, status: 0 }, function (err, result) {
+      if (err) {
+        reject(err)
+      } else
+        resolve(result);
+
+    });
+  }).then((userData) => {
+    User.updateOne({ '_id': userData._id }, { token: '', status: 1 }, function (err) {
+      if (err)
+        throw err;
+      else
+        res.send(result);
+    })
+  })
+
+}
+
 exports.ChangePassword = function (req, res, next) {
   password = req.body.new_pass;
 
