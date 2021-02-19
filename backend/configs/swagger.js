@@ -9,7 +9,7 @@ var swaggerDefinition = {
     version: '1.0.0',
     description: 'Express API Documentation',
   },
-  host: 'localhost:' + (process.env.PORT || 8080),
+  host: 'localhost:' + 8080,
   basePath: '/',
   schemes: ['http']
 }

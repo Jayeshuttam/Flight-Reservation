@@ -28,7 +28,7 @@ var user_schema = new Schema({
     },
 
     status: {
-        enum: [0, 1],
+        type: Number,
         default: 0
     },
     token: {

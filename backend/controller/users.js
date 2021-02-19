@@ -100,13 +100,18 @@ exports.forgot = function (req, res) {
 }
 
 exports.emailVerify = function (req, res) {
-  let token = req.params.token;
+  let token = req.query.token;
   new Promise(function (resolve, reject) {
     User.findOne({ 'token': token, status: 0 }, function (err, result) {
       if (err) {
         reject(err)
-      } else
-        resolve(result);
+      } else {
+        if (result)
+          resolve(result);
+        else
+          reject("Token has been expired");
+      }
+
 
     });
   }).then((userData) => {
@@ -114,8 +119,10 @@ exports.emailVerify = function (req, res) {
       if (err)
         throw err;
       else
-        res.send(result);
+        res.send(userData);
     })
+  }).catch(err => {
+    res.send(err);
   })
 
 }
