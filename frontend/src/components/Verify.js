@@ -14,9 +14,10 @@ class Verify extends Component {
         const query = new URLSearchParams(this.props.location.search);
         this.token = query.get('token')
 
-
+        console.log(this.token)
         this.handleChange = this.handleChange.bind(this);
-        this.create();
+        if (this.token)
+            this.create();
     }
 
     handleChange(changeObject) {
@@ -24,6 +25,7 @@ class Verify extends Component {
     }
 
     create() {
+        console.log("here")
         fetch("http://localhost:8080/verify?token=" + this.token, {
             "headers": {
                 "content-type": "application/json",

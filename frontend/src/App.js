@@ -13,6 +13,7 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Flight from './components/pages/Flight/Flight';
+import Verify from './components/Verify'
 //import SignUp from './components/pages/SignUp/SignUp';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/SignUp' component={SignUp} />
           <Route path='/Login' component={Login} />
           <Route path='/Logout' component={Logout} />
+          <Route path='/Verify' component={Verify} />
           <Redirect to='/' />
         </Switch>
         <Footer />

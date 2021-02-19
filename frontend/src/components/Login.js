@@ -69,6 +69,7 @@ export default class Login extends Component {
 
         <input type="submit" name="signup_submit" value="Log in" onClick={(e) => this.create(e)} />
         <br /><br />
+
         <a href="/ResetPassword">Forget Password?</a>
       </div>
 

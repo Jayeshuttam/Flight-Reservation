@@ -1,13 +1,13 @@
 import React from 'react'
-import MainSection from '../MainSection'
+import FlightHero from '../Flight/FlightHero'
 
-import {homeObjOne} from './Data';
+import { homeObjOne } from './Data';
 
 function Flight() {
     return (
         <div>
-            <MainSection{...homeObjOne}/>
-            
+            <FlightHero{...homeObjOne} />
+
         </div>
     )
 }
