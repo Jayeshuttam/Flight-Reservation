@@ -4,11 +4,13 @@ const app = express();
 var url = require('url');
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
+var swagger = require('./configs/swagger');
 require('./mongo_db');
 
 var userRouter = require('./routes/userRouter');
 const session = require('express-session');
 
+app.use(swagger);
 
 app.use(express.static(path.join(__dirname, 'build')));
 
