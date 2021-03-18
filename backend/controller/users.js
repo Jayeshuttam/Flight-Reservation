@@ -6,47 +6,39 @@ var nodemailer = require('nodemailer');
 var crypto = require('crypto');
 
 exports.login = function (req, res, next) {
-  let body = '';
+  let body = req.body;
+  console.log(body)
+  var responseData = { message: '', results: [], status: 0 }
+
+  let email_input = body.email;
+  let password = body.password;
   new Promise(function (resolve, reject) {
-    req.on('data', chunk => {
-      body += chunk.toString(); // convert Buffer to string
-      resolve(JSON.parse(body))
+    _this = req;
+    _that = res;
+
+    User.authenticate(email_input, password, function (error, user) {
+      if (error || !user) {
+        console.log("error=>", error);
+        console.log("user=>", user);
+        responseData.message = 'Wrong email or password.';
+        responseData.status = 401;
+        reject(responseData);
+      } else {
+        responseData.results = user;
+        responseData.status = 1;
+        responseData.message = "User has been logged in successfully";
+        resolve(responseData)
+      }
     });
-    /*req.on('end', () => {
-      resolve(JSON.parse(body))
-    });*/
-
-  }).then(function (body) {
-
-    let email_input = body.email;
-    let password = body.password;
-    console.log("Incoming inputs => email =>", email_input, " Password => ", password);
-    new Promise(function (resolve, reject) {
-      _this = req;
-      _that = res;
-
-      User.authenticate(email_input, password, function (error, user) {
-        if (error || !user) {
-          console.log("error=>", error);
-          var err = new Error('Wrong email or password.');
-          err.status = 401;
-          reject(err);
-        } else {
-          resolve(user)
-        }
-      });
-    }).then((user) => {
-      console.log("then=>", user)
-      res.send(user);
-    }).catch((err) => {
-      console.log("error=>", err)
-      res.send(err);
-      res.end("error");
-    })
-  }).catch((e) => {
-    res.send("error");
+  }).then((responseData) => {
+    console.log("then=>", responseData)
+    res.json(responseData);
+  }).catch((err) => {
+    console.log("error=>", err)
+    res.send(err);
     res.end("error");
   })
+
 }
 
 exports.signup = function (req, res) {

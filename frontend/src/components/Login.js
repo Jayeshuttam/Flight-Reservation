@@ -20,30 +20,34 @@ export default class Login extends Component {
   }
 
   create(e) {
-    // add entity - POST
     e.preventDefault();
+
+    var details = {
+      'email': this.state.email,
+      'password': this.state.password
+    };
+
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
     // creates entity
     fetch("http://localhost:8080/users/login_verify", {
+      "method": "POST",
       "headers": {
-        "content-type": "application/json",
-        "accept": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "content-type": "application/x-www-form-urlencoded",
+        "accept": "application/json"
       },
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
+      "mode": 'no-cors',
+      "body": formBody
+    })
+      .then(resp => resp.JSON()).then(console.log)
+      .catch(err => {
+        console.log(err)
       })
-    }).then(response => {
-      console.log(response.text());
-      this.setState({ uid: response.text() })
-      localStorage.setItem('uid', this.state.uid)
-      this.setState({ redirect: true })
-
-    }).catch(err => {
-      console.log(err);
-    });
   }
 
   render() {

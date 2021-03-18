@@ -53,7 +53,7 @@ user_schema.pre('save', function (next) {
 
 
 user_schema.statics.authenticate = function (email_input, password, callback) {
-    User.findOne({ 'email': email_input }).exec(function (err, user) {
+    User.findOne({ 'email': email_input }, { token: false, _id: false }).exec(function (err, user) {
         if (err) {
             return callback(err);
         } else if (!user) {
@@ -63,9 +63,11 @@ user_schema.statics.authenticate = function (email_input, password, callback) {
         }
         bcrypt.compare(password, user.password, function (err, result) {
             if (result === true) {
+                const { password, ...filteredObject } = user;
+                console.log(filteredObject);
                 return callback(null, user);
             } else {
-                return callback();
+                return callback("custom error");
             }
         })
 

@@ -60,6 +60,40 @@ let userConteroller = require("../controller/users");
     */
 router.post("/users/signup_verify", userConteroller.signup);
 
+/**
+    * @swagger
+    * /users/login_verify:
+    *   post:
+    *     tags:
+    *       - Users
+    *     description: Login User
+    *     consumes:
+    *       - application/x-www-form-urlencoded
+    *     produces:
+    *       - application/json
+    *     parameters:
+    *       - name: email
+    *         description: Email
+    *         in: formData
+    *         required: true
+    *         type: string
+
+    *       - name: password
+    *         description: password
+    *         in: formData
+    *         required: true
+    *         type: string
+    *     responses:
+    *       201:
+    *         description: User created successfully    
+    *       409:
+    *         description: User already exists    
+    *       405:
+    *         description: Invalid Request. Please try again.    
+    *       500:
+    *         description: Something went wrong. Server Error    
+    *
+    */
 router.post("/users/login_verify", userConteroller.login);
 router.post("/forgot", userConteroller.forgot);
 router.post('/changepassword', userConteroller.ChangePassword);
