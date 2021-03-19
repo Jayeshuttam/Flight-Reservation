@@ -6,6 +6,7 @@ var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
 var swagger = require('./configs/swagger');
 require('./mongo_db');
+const flightdata = require('./flight_api');
 
 var userRouter = require('./routes/userRouter');
 const session = require('express-session');
@@ -38,7 +39,12 @@ app.get('/ping', function (req, res) {
     return res.send('pong');
 });
 
+app.get('/api/ping', function (req, res) {
+    if (req.json({ "success": true })) {
+        res.status(200);
+    }
+});
 
-
+app.post('/flightdata', flightdata.sendAirlineData);
 
 app.listen(process.env.PORT || 8080);
