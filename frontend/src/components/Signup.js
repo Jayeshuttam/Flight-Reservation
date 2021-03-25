@@ -6,8 +6,8 @@ export default class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            first_name: '',
-            last_name: '',
+            firstname: '',
+            lastname: '',
             email: '',
             password: '',
             phone: ''
@@ -24,22 +24,33 @@ export default class SignUp extends Component {
     create(e) {
         // add entity - POST
         e.preventDefault();
+
+
+        var details = {
+            firstname: this.state.first_name,
+            lastname: this.state.last_name,
+            email: this.state.email,
+            password: this.state.password,
+            phone: this.state.phone
+        };
+
+        var formBody = [];
+        for (var property in details) {
+            var encodedKey = encodeURIComponent(property);
+            var encodedValue = encodeURIComponent(details[property]);
+            formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+
         // creates entity
         fetch("http://localhost:8080/users/signup_verify", {
             "headers": {
-                "content-type": "application/json",
-                "accept": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "content-type": "application/x-www-form-urlencoded",
+                "accept": "application/json"
             },
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                email: this.state.email,
-                password: this.state.password,
-                phone: this.state.phone
-            })
+            body: formBody
         })
             .then(response => {
                 console.log(response);

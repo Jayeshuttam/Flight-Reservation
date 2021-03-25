@@ -7,9 +7,7 @@ var crypto = require('crypto');
 
 exports.login = function (req, res, next) {
   let body = req.body;
-  console.log(body)
   var responseData = { message: '', results: [], status: 0 }
-
   let email_input = body.email;
   let password = body.password;
   new Promise(function (resolve, reject) {
@@ -18,8 +16,6 @@ exports.login = function (req, res, next) {
 
     User.authenticate(email_input, password, function (error, user) {
       if (error || !user) {
-        console.log("error=>", error);
-        console.log("user=>", user);
         responseData.message = 'Wrong email or password.';
         responseData.status = 401;
         reject(responseData);
@@ -31,10 +27,8 @@ exports.login = function (req, res, next) {
       }
     });
   }).then((responseData) => {
-    console.log("then=>", responseData)
     res.json(responseData);
   }).catch((err) => {
-    console.log("error=>", err)
     res.send(err);
     res.end("error");
   })
@@ -42,80 +36,60 @@ exports.login = function (req, res, next) {
 }
 
 exports.signup = function (req, res) {
-  var payload = {
+  let body = req.body;
+  var responseData = {
     message: "user can not save",
-    results: {},
-    code: 400
+    results: [],
+    status: 0
   }
-  let body = '';
+  console.log("body=>", body);
+  let firstname = body.firstname;
+  let lastName = body.lastname;
+  let email = body.email;
+  let password = body.password;
+  let phone = body.phone;
+
+
   new Promise(function (resolve, reject) {
-    req.on('data', chunk => {
-      body += chunk.toString(); // convert Buffer to string
+
+    var hash = crypto.createHash('md5').update(email).digest('hex');
+    let userData = {
+      'first_name': firstname,
+      'last_Name': lastName,
+      'phone': phone,
+      'email': email,
+      'password': password,
+      'status': 0,
+      'token': hash
+    };
+    console.log("userData=>", userData)
+    User.create(userData, function (err, result) {
+      if (err) {
+        reject(err);
+
+      }
+      else {
+        resolve(result);
+      }
     });
-    req.on('end', () => {
-      console.log("bodyData=>", JSON.parse(body).phone);
-      //res.end('ok');
-      resolve(JSON.parse(body))
+  }).then((body) => {
+
+    User.find({ 'email': body.email }, { _id: false, password: false }, function (err, result) {
+      if (!err) {
+        console.log("Incoming inputs => email =>", body.email);
+        sendVerifyLink(body.email, body.token, 'Verify');
+      }
+
+      responseData.message = "user has been saved successfully";
+      responseData.results = result;
+      responseData.status = 1;
+      res.send(responseData);
     });
+  }).catch((err) => {
+    responseData.message = err;
+    res.send(responseData);
+  })
 
-  }).then(function (body) {
-
-    let first_name = body.first_name;
-    let last_Name = body.last_name;
-    let email = body.email;
-    let password = body.password;
-    let phone = body.phone;
-
-
-    new Promise(function (resolve, reject) {
-
-      var hash = crypto.createHash('md5').update(email).digest('hex');
-      console.log(hash); // 9b74c9897bac770ffc029102a200c5de
-
-      User.create({
-        'first_name': first_name,
-        'last_Name': last_Name,
-        'phone': phone,
-        'email': email,
-        'password': password,
-        'status': 0,
-        'token': hash
-      },
-        function (err, result) {
-          if (err) {
-            reject(err);
-
-          }
-          else {
-            console.log("Email=>", email);
-            resolve(result);
-          }
-        }
-      );
-    }).then((body) => {
-
-      User.find({ 'email': body.email }, { _id: false, password: false }, function (err, result) {
-        if (err) {
-          throw err;
-        }
-        else {
-          console.log("Incoming inputs => email =>", body.email);
-          if (sendVerifyLink(body.email, body.token, 'Verify') == true) {
-            res.send(result);
-          }
-        }
-
-        // try to send payload
-        payload.message = "user has been saved successfully";
-        payload.results = result;
-        payload.code = 200;
-        res.send(result);
-        //console.log("Find=>",result);
-        //response.redirect('/Login');
-      });
-    })
-
-  });
 
 }
 
