@@ -35,19 +35,47 @@ export default class Login extends Component {
     }
     formBody = formBody.join("&");
     // creates entity
-    fetch("http://localhost:8080/users/login_verify", {
-      "method": "POST",
-      "headers": {
-        "content-type": "application/x-www-form-urlencoded",
-        "accept": "application/json"
-      },
-      "mode": 'no-cors',
-      "body": formBody
-    })
-      .then(resp => resp.JSON()).then(console.log)
-      .catch(err => {
-        console.log(err)
-      })
+    /* fetch("http://localhost:8080/users/login_verify", {
+       "method": "POST",
+       "headers": {
+         "content-type": "application/x-www-form-urlencoded",
+         "accept": "application/json"
+       },
+       "mode": 'no-cors',
+       "body": formBody
+     })
+       .then(resp => resp.JSON()).then(json => console.log(json))
+       .catch(err => {
+         console.log(err)
+       })
+   */
+    // create an XHR object
+    const xhr = new XMLHttpRequest();
+
+    // listen for `onload` event
+    xhr.onload = () => {
+      // process response
+      if (xhr.status == 200) {
+        // parse JSON data
+        var result = JSON.parse(xhr.response);
+        if (result.status == 1) {
+          this.setState({ uid: result.results.email })
+          localStorage.setItem('uid', this.state.uid)
+          this.setState({ redirect: true })
+        }
+      } else {
+        console.error('Error!');
+      }
+    };
+
+    // set headers
+
+    xhr.open('POST', 'http://localhost:8080/users/login_verify');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    // send request
+    xhr.send(formBody);
   }
 
   render() {

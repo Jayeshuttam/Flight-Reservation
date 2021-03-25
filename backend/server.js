@@ -1,6 +1,10 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+var cors = require('cors')
+
+
+
 var url = require('url');
 var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
@@ -13,6 +17,7 @@ const session = require('express-session');
 
 app.use(swagger);
 
+app.use(cors())
 app.use(express.static(path.join(__dirname, 'build')));
 
 // configure the app to use bodyParser()

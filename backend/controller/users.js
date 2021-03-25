@@ -7,7 +7,9 @@ var crypto = require('crypto');
 
 exports.login = function (req, res, next) {
   let body = req.body;
+  console.log(body)
   var responseData = { message: '', results: [], status: 0 }
+
   let email_input = body.email;
   let password = body.password;
   new Promise(function (resolve, reject) {
@@ -27,10 +29,11 @@ exports.login = function (req, res, next) {
       }
     });
   }).then((responseData) => {
-    res.json(responseData);
+    res.status(200).send(responseData);
   }).catch((err) => {
-    res.send(err);
-    res.end("error");
+    res.status(400).send({
+      "error": err
+    });
   })
 
 }
@@ -42,9 +45,8 @@ exports.signup = function (req, res) {
     results: [],
     status: 0
   }
-  console.log("body=>", body);
   let firstname = body.firstname;
-  let lastName = body.lastname;
+  let lastname = body.lastname;
   let email = body.email;
   let password = body.password;
   let phone = body.phone;
@@ -55,14 +57,13 @@ exports.signup = function (req, res) {
     var hash = crypto.createHash('md5').update(email).digest('hex');
     let userData = {
       'first_name': firstname,
-      'last_Name': lastName,
+      'last_Name': lastname,
       'phone': phone,
       'email': email,
       'password': password,
       'status': 0,
       'token': hash
     };
-    console.log("userData=>", userData)
     User.create(userData, function (err, result) {
       if (err) {
         reject(err);
