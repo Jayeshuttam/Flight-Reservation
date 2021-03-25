@@ -14,7 +14,10 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Flight from './components/pages/Flight/Flight';
 import Verify from './components/Verify'
+//import { feedback } from '../../backend/controller/feedback';
+import Feedback from './components/pages/Contact/Feedback';
 //import SignUp from './components/pages/SignUp/SignUp';
+import Flights from './components/pages/bookFlight/Flights'
 
 function App() {
   return (
@@ -23,7 +26,8 @@ function App() {
         <Navbar />
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/flights' component={Flight} />
+          <Route path='/flights' component={Flights} />
+          <Route path='/feedback' component={Feedback} />
           <Route path='/ResetPassword' component={ResetPassword} />
           <Route path='/ChangePassword' component={ChangePassword} />
           <Route path='/SignUp' component={SignUp} />

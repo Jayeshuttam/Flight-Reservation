@@ -3,7 +3,7 @@ const { Router } = require("express");
 let express = require('express');
 let router = express.Router();
 let userConteroller = require("../controller/users");
-
+let feedbackController=require("../controller/feedback");
 /**
     * @swagger
     * /users/signup_verify:
@@ -60,6 +60,8 @@ let userConteroller = require("../controller/users");
     */
 router.post("/users/signup_verify", userConteroller.signup);
 
+
+router.post("/api/form",feedbackController.feedback);
 /**
     * @swagger
     * /users/login_verify:
