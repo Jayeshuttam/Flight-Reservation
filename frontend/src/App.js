@@ -12,7 +12,6 @@ import Home from './components/pages/HomePage/Home';
 import SignUp from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Flight from './components/pages/Flight/Flight';
 import Verify from './components/Verify'
 //import { feedback } from '../../backend/controller/feedback';
 import Feedback from './components/pages/Contact/Feedback';

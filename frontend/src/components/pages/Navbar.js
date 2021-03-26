@@ -58,6 +58,9 @@ function Navbar() {
                             <li className='nav-item'>
                                 <Link to='/MyAccount' className='nav-links' onClick={closeMobileMenu}>My Account</Link>
                             </li>
+                            <li className='nav-item'>
+                                <Link to='/feedback' className='nav-links' onClick={closeMobileMenu}>Contact</Link>
+                            </li>
                             {
                                 !isLogin ?
                                     <li className='nav-btn'>
@@ -95,9 +98,7 @@ function Navbar() {
                                     </li>
                                     : ''
                             }
-                               <li className='nav-item'>
-                                <Link to='/feedback' className='nav-links' onClick={closeMobileMenu}>Contact</Link>
-                            </li>           
+
                         </ul>
                     </div>
                 </nav>
