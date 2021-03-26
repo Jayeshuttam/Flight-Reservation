@@ -5,21 +5,13 @@ var query = require('querystring');
 var url = require('url');
 var bodyParser = require('body-parser');
 exports.sendAirlineData = function (req, res) {
-    console.log(
-        "HERE"
-    );
     let body = req.body;
-
-
-    console.log("BODY=>", body);
     let origin = body.origin;
-    console.log("origin=>", origin);
     let destination = body.destination;
     let date = body.date;
     let inbound_date = body.round_date;
     if (inbound_date == null || inbound_date == '') {
         inbound_date = "";
-
     }
     else {
         inbound_date = "?inboundpartialdate=" + inbound_date;
@@ -34,7 +26,6 @@ exports.sendAirlineData = function (req, res) {
         }
     };
     axios.request(options).then(function (response) {
-        c
         console.log("Response data : " + response.data);
     }).catch(function (error) {
 

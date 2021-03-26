@@ -10,9 +10,9 @@ var nodemailer = require('nodemailer');
 var bodyParser = require('body-parser');
 var swagger = require('./configs/swagger');
 require('./mongo_db');
-const flightdata = require('./flight_api');
 
 var userRouter = require('./routes/userRouter');
+var flightRouter = require('./routes/flightRouter');
 const session = require('express-session');
 
 app.use(swagger);
@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.use('/', userRouter);
+app.use('/', flightRouter);
 app.use(session({
     secret: 'work hard',
     resave: true,
@@ -49,7 +50,5 @@ app.get('/api/ping', function (req, res) {
         res.status(200);
     }
 });
-
-app.post('/flightdata', flightdata.sendAirlineData);
 
 app.listen(process.env.PORT || 8080);
