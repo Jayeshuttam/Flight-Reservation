@@ -8,6 +8,7 @@ var url = require('url');
 var bodyParser = require('body-parser');
 exports.sendAirlineData = function (req, responseData) {
     let body = req.body;
+    console.log("body=>", body);
     let origin = body.origin;
     let destination = body.destination;
     let departDate = body.departDate;
