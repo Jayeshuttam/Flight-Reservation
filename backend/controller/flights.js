@@ -1,6 +1,6 @@
 //const TravelPayouts = require('travelpayouts-api');
 //const api = new TravelPayouts('76c613d1674a8dd11c39edb30e7a2d96', '316227');
-
+let FlightBooking = require("../models/flight");
 const http = require("https");
 const axios = require('axios').default;
 var query = require('querystring');
@@ -33,21 +33,81 @@ exports.sendAirlineData = function (req, responseData) {
         console.error(error);
     });
 
-    /*
-        return api.search({
-            origin: origin,
-            destination: destination,
-            date: new Date(),
-            currency: 'USD'
+}
+exports.bookFlight = function (req, res) {
+    let body = req.body;
+    let userId = body.userId;
+    let origin = body.origin;
+    let destination = body.destination;
+    let price = body.price;
+    let adults = body.adults;
+    let children = body.children;
+    let flightClass = body.flightClass;
+    let tripType = body.tripType;
+    let departDate = body.departDate;
+    let returnDate = body.returnDate;
+
+    var responseData = { message: '', results: [], status: 0 }
+
+    let flightBookingData = {
+        'userId': userId,
+        'origin': origin,
+        'destination': destination,
+        'price': price,
+        'adults': adults,
+        'children': children,
+        'flightClass': flightClass,
+        'tripType': tripType,
+        'departDate': departDate,
+        'returnDate': returnDate
+    };
+    new Promise(function (resolve, reject) {
+        FlightBooking.create(flightBookingData, function (err, result) {
+            if (err) {
+                responseData.message = 'Flight can not book. Please try again.';
+                responseData.status = 401;
+                responseData.results = err;
+                reject(responseData);
+            }
+            else {
+                responseData.message = 'Flight has been booked successfully.';
+                responseData.status = 200;
+                responseData.results = result;
+                resolve(result);
+            }
         })
-            .then(res => {
-                // console.log(res.results);
-                responseData.status(200).send(res.results);
-            })
-            .catch(err => {
-                console.error(err.stack || err.message);
-                responseData.status(400).send(err.stack || err.message);
-            });
-            */
+    }).then((responseData) => {
+        res.status(200).send(responseData);
+
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
+}
+
+exports.getMyBookings = function (req, res) {
+    let body = req.body;
+    let userId = body.userId;
+    var responseData = { message: '', results: [], status: 0 }
+    new Promise(function (resolve, reject) {
+        FlightBooking.find({ userId: userId }, function (err, result) {
+            if (err) {
+                responseData.message = 'No flight has been found. Please try again.';
+                responseData.status = 401;
+                responseData.results = err;
+                reject(responseData);
+            }
+            else {
+                responseData.message = 'All flights have been found successfully.';
+                responseData.status = 200;
+                responseData.results = result;
+                resolve(responseData);
+            }
+        })
+    }).then((responseData) => {
+        res.status(200).send(responseData);
+
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
 }
 
