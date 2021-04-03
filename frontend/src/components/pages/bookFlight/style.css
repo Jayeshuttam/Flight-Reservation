@@ -2,7 +2,15 @@
 	position: relative;
 	height: 100vh;
 }
-
+#returnFlight{
+	display: none;
+}
+#submit-btn11{
+	width: 160px;
+}
+.col-md-3{
+	padding-right: 15px;
+}
 .section .section-center {
 	position: absolute;
 	top: 50%;
@@ -11,7 +19,16 @@
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
-
+#Adults{
+	padding-left: 15px;
+	
+}
+#children{
+	position: relative;
+	padding-left: 15px;
+	text-align: center;
+	width: 20px;
+}
 #booking {
 	font-family: 'PT Sans', sans-serif;
 	background-size: cover;
@@ -27,6 +44,13 @@
 .booking-form .form-group {
 	position: relative;
 	margin-bottom: 20px;
+}
+#slc1{
+	width: 120px;
+}
+
+#slc2{
+	width: 120px;
 }
 
 .booking-form .form-control {
@@ -160,7 +184,7 @@
 	height: 50px;
 	font-size: 14px;
 	border: none;
-	width: 100%;
+	width: 150%;
 	border-radius: 40px;
 	text-transform: uppercase;
 	-webkit-transition: 0.2s all;
@@ -171,3 +195,10 @@
 .booking-form .submit-btn:focus {
 	opacity: 0.9;
 }
+
+@media (max-width: 992px) {
+	.alert-validate::before {
+	  visibility: visible;
+	  opacity: 1;
+	}
+  }

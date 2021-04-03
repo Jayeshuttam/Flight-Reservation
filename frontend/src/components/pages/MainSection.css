@@ -6,7 +6,16 @@
   .home__hero-row {
     align-items: center;
   }
-  
+  button.btn.btn--outline.btn--medium.null {
+    color: #fff;
+}
+
+button.btn.btn--outline.btn--medium.null:hover, button.btn.btn--outline.btn--medium.null:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  box-shadow: none;
+  color: #0056b3;
+}
   .row {
     display: flex;
     margin-right: -15px;

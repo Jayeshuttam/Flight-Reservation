@@ -18,6 +18,7 @@ import MyFlights from './components/pages/bookFlight/myFlights';
 import Feedback from './components/pages/Contact/Feedback';
 //import SignUp from './components/pages/SignUp/SignUp';
 import Flights from './components/pages/bookFlight/Flights'
+import FlightPortal from './components/pages/FlightPortal/FlightPortal';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/flights' component={Flights} />
+          <Route path='/flightPortal' component={FlightPortal} />
           <Route path='/feedback' component={Feedback} />
           <Route path='/ResetPassword' component={ResetPassword} />
           <Route path='/ChangePassword' component={ChangePassword} />
