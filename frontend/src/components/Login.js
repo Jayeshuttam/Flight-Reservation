@@ -7,6 +7,7 @@ export default class Login extends Component {
     super(props);
     this.state = {
       uid: '',
+      userId: '',
       email: '',
       password: ''
     };
@@ -61,6 +62,10 @@ export default class Login extends Component {
         if (result.status == 1) {
           this.setState({ uid: result.results.email })
           localStorage.setItem('uid', this.state.uid)
+
+          this.setState({ userId: result.results._id })
+          localStorage.setItem('userId', this.state.userId)
+
           this.setState({ redirect: true })
         }
       } else {

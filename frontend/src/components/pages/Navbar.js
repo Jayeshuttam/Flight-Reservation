@@ -59,6 +59,9 @@ function Navbar() {
                                 <Link to='/MyAccount' className='nav-links' onClick={closeMobileMenu}>My Account</Link>
                             </li>
                             <li className='nav-item'>
+                                <Link to='/My-Bookings' className='nav-links' onClick={closeMobileMenu}>My Bookings</Link>
+                            </li>
+                            <li className='nav-item'>
                                 <Link to='/feedback' className='nav-links' onClick={closeMobileMenu}>Contact</Link>
                             </li>
                             {

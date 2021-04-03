@@ -53,7 +53,7 @@ user_schema.pre('save', function (next) {
 
 
 user_schema.statics.authenticate = function (email_input, password, callback) {
-    User.findOne({ 'email': email_input }, { token: false, _id: false }).exec(function (err, user) {
+    User.findOne({ 'email': email_input }, { token: false }).exec(function (err, user) {
         if (err) {
             return callback(err);
         } else if (!user) {

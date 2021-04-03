@@ -12,7 +12,8 @@ import Home from './components/pages/HomePage/Home';
 import SignUp from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Verify from './components/Verify'
+import Verify from './components/Verify';
+import MyFlights from './components/pages/bookFlight/myFlights';
 //import { feedback } from '../../backend/controller/feedback';
 import Feedback from './components/pages/Contact/Feedback';
 //import SignUp from './components/pages/SignUp/SignUp';
@@ -29,10 +30,11 @@ function App() {
           <Route path='/feedback' component={Feedback} />
           <Route path='/ResetPassword' component={ResetPassword} />
           <Route path='/ChangePassword' component={ChangePassword} />
+          <Route path='/ChangePassword' component={ChangePassword} />
           <Route path='/SignUp' component={SignUp} />
           <Route path='/Login' component={Login} />
           <Route path='/Logout' component={Logout} />
-          <Route path='/Verify' component={Verify} />
+          <Route path='/My-Bookings' component={MyFlights} />
           <Redirect to='/' />
         </Switch>
         <Footer />
