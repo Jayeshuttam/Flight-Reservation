@@ -17,7 +17,8 @@ export default class Flights extends Component {
             numberOfAdults: '',
             numberOfChildren: '',
             travelClass: '',
-            flightData: ''
+            flightData: '',
+			tripType:false
         };
 
         this.create = this.create.bind(this);
@@ -28,6 +29,7 @@ export default class Flights extends Component {
         this.setState(changeObject)
     }
 
+	
     create(e) {
         e.preventDefault();
 
@@ -89,7 +91,7 @@ export default class Flights extends Component {
                 console.error('Error!');
             }
         };
-
+ 
         // set headers
 
         xhr.open('POST', 'http://localhost:8080/flightdata');
@@ -100,7 +102,14 @@ export default class Flights extends Component {
         xhr.send(formBody);
     }
 
+/*	componentDidMount = () =>{
+	 this.getDataFlight();	
+	}
+	getDataFlight=()=>{
+		axios.get('')
+	}
 
+*/
     render() {
         const { redirect } = this.state;
 
@@ -108,135 +117,123 @@ export default class Flights extends Component {
             // return <Redirect to='/Verify' />;
         }
         return (
-            <div id="booking" className="section" style={{ backgroundImage: `url(${background})` }}>
-                <div className="section-center">
-                    <div className="container">
-                        <div className="row">
-                            <div className="booking-form">
-                                <form>
-                                    <div className="form-group">
-                                        <div className="form-checkbox">
-                                            <label htmlFor="roundtrip">
-                                                <input type="radio" id="roundtrip" name="flightType" />
-                                                <span></span>Roundtrip
-                                        </label>
-                                            <label htmlFor="one-way">
-                                                <input type="radio" id="one-way" name="flightType" />
-                                                <span></span>One way
-                                        </label>
 
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <span className="form-label">Flying from</span>
-                                                <input className="form-control" type="text" placeholder="City or airport"
-                                                    value={this.state.origin}
-                                                    onChange={(e) => this.handleChange({ origin: e.target.value })}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-6">
-                                            <div className="form-group">
-                                                <span className="form-label">Flyning to</span>
-                                                <input className="form-control" type="text" placeholder="City or airport"
-                                                    value={this.state.destination}
-                                                    onChange={(e) => this.handleChange({ destination: e.target.value })}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <div className="form-group">
-                                                <span className="form-label">Departing</span>
-                                                <input className="form-control" type="date" required
-                                                    value={this.state.departureDate}
-                                                    onChange={(e) => this.handleChange({ departureDate: e.target.value })}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div style={{ display: 'none' }} className="col-md-3">
-                                            <div className="form-group">
-                                                <span className="form-label">Returning</span>
-                                                <input className="form-control" type="date" required
-                                                    value={this.state.returnDate}
-                                                    onChange={(e) => this.handleChange({ returnDate: e.target.value })}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="col-md-2">
-                                            <div className="form-group">
-                                                <span className="form-label">Adults (18+)</span>
-                                                <select className="form-control"
-                                                    value={this.state.numberOfAdults}
-                                                    onChange={(e) => this.handleChange({ numberOfAdults: e.target.value })}
-                                                >
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                <span className="select-arrow"></span>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-2">
-                                            <div className="form-group">
-                                                <span className="form-label">Children (0-17)</span>
-                                                <select className="form-control"
-                                                    value={this.state.numberOfChildren}
-                                                    onChange={(e) => this.handleChange({ numberOfChildren: e.target.value })}
-                                                >
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                </select>
-                                                <span className="select-arrow"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <div className="form-group">
-                                                <span className="form-label">Travel class</span>
-                                                <select className="form-control"
-                                                    value={this.state.travelClass}
-                                                    onChange={(e) => this.handleChange({ travelClass: e.target.value })}
-                                                >
-                                                    <option>Economy class</option>
-                                                    <option>Business class</option>
-                                                    <option>First class</option>
-                                                </select>
-                                                <span className="select-arrow"></span>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <div className="form-btn">
-                                                <button className="submit-btn" type="submit" onClick={(e) => this.create(e)}>Show flights</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8 column">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Number</th>
-                                <th>Dep.</th>
-                                <th>Arr.</th>
-                                <th>Price</th>
-                                <th>Dep. Time</th>
-                            </tr>
-                        </thead>
-                        <tbody id="flights_info">{this.state.flightData}</tbody>
-                    </table>
-                </div>
-            </div>
+            
+            <div id="booking" class="section" style={{backgroundImage:`url(${background})`}}>
+               <div class="section-center">
+			<div class="container">
+				<div class="row">
+					<div class="booking-form">
+						<form>
+							<div class="form-group">
+								<div class="form-checkbox">
+									<label for="roundtrip" >
+										<input type="radio" value={this.state.tripType} onChange={(e) => this.handleChange({ tripType:false})} id="roundtrip" name="flight-type" required/>
+										<span></span>Roundtrip
+									</label>
+									<label for="one-way">
+										<input type="radio" value={this.state.tripType} onChange={(e) => this.handleChange({ tripType:true})} id="one-way" name="flight-type" required/>
+										<span></span>One way
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label">Flying from</span>
+										<input class="form-control" type="text" placeholder="City or airport"
+										 value={this.state.origin}
+										 onChange={(e) => this.handleChange({ origin: e.target.value })}
+										/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label">Flyning to</span>
+										<input class="form-control" type="text" placeholder="City or airport"
+										value={this.state.destination}
+										onChange={(e) => this.handleChange({ destination: e.target.value })}
+										/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label">Departing</span>
+										<input class="form-control" type="date" required
+										value={this.state.departureDate}
+										onChange={(e) => this.handleChange({ departureDate: e.target.value })}
+										/>
+									</div>
+								</div>
+								<div id={this.state.tripType?'returnFlight':''} class="col-md-3">
+									<div class="form-group">
+										<span class="form-label">Returning</span>
+										<input class="form-control" type="date" required
+										value={this.state.returnDate}
+										onChange={(e) => this.handleChange({ returnDate: e.target.value })}
+										/>
+									</div>
+								</div>
+								<div id="Adults" class="col-md-2">
+									<div class="form-group">
+										<span class="form-label">Adults (18+)</span>
+										<select id="slc1" class="form-control"
+										value={this.state.numberOfAdults}
+										onChange={(e) => this.handleChange({ numberOfAdults: e.target.value })}
+										>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+										
+									</div>
+								</div>
+								<div id="children" class="col-md-2">
+									<div class="form-group">
+										<span class="form-label">Children (0-17)</span>
+										<select id="slc2" class="form-control"
+										 value={this.state.numberOfChildren}
+										 onChange={(e) => this.handleChange({ numberOfChildren: e.target.value })}
+										>
+											<option>0</option>
+											<option>1</option>
+											<option>2</option>
+										</select>
+										
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label">Travel class</span>
+										<select class="form-control"
+										 value={this.state.travelClass}
+										 onChange={(e) => this.handleChange({ travelClass: e.target.value })}
+										>
+											<option>Economy class</option>
+											<option>Business class</option>
+											<option>First class</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-btn">
+										<button id="submit-btn11" type="submit" onClick={(e) => this.create(e)} class="submit-btn">Show flights</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+        		
+        </div>
 
 
 
