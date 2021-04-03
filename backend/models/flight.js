@@ -36,6 +36,13 @@ var flight_booking_schema = new Schema({
     tripType: {
         type: String,
         required: true
+    },
+    departDate: {
+        type: String,
+        required: true
+    },
+    returnDate: {
+        type: String,
     }
 })
 var FlightBooking = mongoose.model("FlightBooking", flight_booking_schema);

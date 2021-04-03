@@ -28,7 +28,7 @@ function App() {
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/flights' component={Flights} />
-          <Route path='/flightPortal' component={FlightPortal} />
+          <Route path='/Flight-Portal' component={FlightPortal} />
           <Route path='/feedback' component={Feedback} />
           <Route path='/ResetPassword' component={ResetPassword} />
           <Route path='/ChangePassword' component={ChangePassword} />

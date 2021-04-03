@@ -23,27 +23,8 @@ export default class MYFlights extends Component {
     handleChange(changeObject) {
         this.setState(changeObject)
     }
-    pay = (amount) => {
-        var handler = window.StripeCheckout.configure({
-            key: 'pk_test_51IbuXaDG3xecOuBWO770WPwjg7w7YGqKh23sQOg0dZxqGpUTztn9gmKVVi9oZTAOjEsBxnt2FfVOeYhpsiHJqAhN00JPZ6n9ya',
-            locale: 'auto',
-            token: function (token) {
-                // You can access the token ID with `token.id`.
-                // Get the token ID to your server-side code for use.
-                console.log(token)
-                alert('Token Created!!' + token.id);
-            }
-        });
-
-        handler.open({
-            name: 'Demo Site',
-            description: '2 widgets',
-            amount: amount * 100
-        });
-    }
 
     componentDidMount() {
-        this.loadStripe();
         let uid = localStorage.getItem('userId');
         console.log("userId=>", uid)
         let getFlightDataObject = {
@@ -91,45 +72,65 @@ export default class MYFlights extends Component {
         xhr.send(formBody);
     }
 
-    loadStripe = () => {
-
-        if (!window.document.getElementById('stripe-script')) {
-            var s = window.document.createElement("script");
-            s.id = "stripe-script";
-            s.type = "text/javascript";
-            s.src = "https://checkout.stripe.com/checkout.js";
-            window.document.body.appendChild(s);
-        }
-    }
-
     render() {
         return (
-            <div id="booking" className="section" style={{ backgroundImage: `url(${background})` }}>
-                <table className="table table-bordered">
-                    <tr>
-                        <th>Origin</th>
-                        <th>Destination</th>
-                        <th>Adults</th>
-                        <th>Children</th>
-                        <th>Flight Class</th>
-                        <th>Trip Type</th>
-                        <th>Price</th>
-                    </tr>
-                    {
-                        this.state.flightData.map((flight, index) => (
-                            <tr data-index={index}>
-                                <td>{this.capitalize(flight.origin)}</td>
-                                <td>{this.capitalize(flight.destination)}</td>
-                                <td>{flight.adults}</td>
-                                <td>{flight.children}</td>
-                                <td>{this.capitalize(flight.flightClass)}</td>
-                                <td>{this.capitalize(flight.tripType)}</td>
-                                <td>${flight.price}</td>
-                            </tr>
-                        ))
-                    }
-                </table>
-            </div>
+            <section class="ftco-section" style={{ backgroundImage: `url(${background})` }}>
+                <div class="container">
+                    <div class="row justify-content-center">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="h5 mb-4 text-center">Flights</h3>
+                            <div class="table-wrap" style={{ marginLeft: 0 }}>
+                                <table class="table">
+                                    <thead class="thead-primary">
+                                        <tr>
+                                            <th>Departing From</th>
+                                            <th>Departing To</th>
+                                            <th>Departing Date</th>
+                                            <th>Returning Date</th>
+                                            <th>Adults</th>
+                                            <th>Childrens</th>
+                                            <th>Travel Class</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.flightData.map((flight, index) => (
+
+                                                <tr class="alert" role="alert">
+                                                    <td>
+                                                        <div class="departingFrom">
+                                                            <span>{flight.origin.toUpperCase()} </span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="departingTo">
+                                                            <span>{flight.destination.toUpperCase()}</span>
+
+                                                        </div>
+                                                    </td>
+                                                    <td>{flight.departDate ? flight.departDate : "-"}</td>
+                                                    <td>{flight.returnDate ? flight.returnDate : "-"}</td>
+
+                                                    <td>{flight.adults}</td>
+                                                    <td>{flight.children ? flight.children : "-"}</td>
+                                                    <td>
+                                                        {this.capitalize(flight.tripType)}
+                                                    </td>
+                                                    <td>${flight.price}</td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         )
     }
 }
