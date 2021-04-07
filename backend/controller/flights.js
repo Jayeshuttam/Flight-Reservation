@@ -13,7 +13,7 @@ exports.sendAirlineData = function (req, responseData) {
     let destination = body.destination;
     let departDate = body.departDate;
     let returnDate = body.returnDate;
-
+    console.log("BODY=> ", body);
     let apiUrl = "http://api.travelpayouts.com/v1/prices/cheap?origin=" + origin + "&destination=" + destination + "&depart_date=" + departDate + "&currency=USD";
     if (returnDate != undefined && returnDate != "") {
         apiUrl += "&return_date=" + returnDate;

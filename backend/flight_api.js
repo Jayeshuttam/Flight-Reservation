@@ -9,6 +9,7 @@ exports.sendAirlineData = function (req, res) {
     let origin = body.origin;
     let destination = body.destination;
     let date = body.date;
+    console.log("Body=>", body);
     let inbound_date = body.round_date;
     if (inbound_date == null || inbound_date == '') {
         inbound_date = "";

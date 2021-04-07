@@ -22,13 +22,18 @@ exports.login = function (req, res, next) {
         responseData.status = 401;
         reject(responseData);
       } else {
-        responseData.results = user;
+        responseData.result_data = user;
+        responseData.first_name = user.first_name;
+        responseData.last_name = user.last_Name;
+        responseData.email = user.email;
+        responseData.phone = user.phone;
         responseData.status = 1;
-        responseData.message = "User has been logged in successfully";
+        responseData.message_body = "User has been logged in successfully";
         resolve(responseData)
       }
     });
   }).then((responseData) => {
+    console.log("RESponse data=>", responseData);
     res.status(200).send(responseData);
   }).catch((err) => {
     res.status(400).send({
