@@ -36,8 +36,9 @@
 
 .ButtonBookNow{
 	width:120px;
+  height: 40px;
 	border-radius:20px;
-	background-color:#99b19c;
+	background-color: #1c2237;
 	color:white;
 }
 
@@ -430,6 +431,13 @@ pre {
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll; }
+
+  .booking-form {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 6px;
+    width: 907px;
+}
 
 .container {
   width: 100%;
@@ -8251,6 +8259,9 @@ h1, h2, h3, h4, h5,
   color: rgba(0, 0, 0, 0.2); }
 
 /* Style the checkmark/indicator */
+.table thead.thead-primary {
+  background:  #1c2237;
+}
 .checkbox-primary {
   color: #99b19c; }
   .checkbox-primary input:checked ~ .checkmark:after {

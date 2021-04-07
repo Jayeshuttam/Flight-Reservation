@@ -8,6 +8,7 @@
 #submit-btn11{
 	width: 160px;
 }
+
 .col-md-3{
 	padding-right: 15px;
 }
@@ -190,6 +191,7 @@
 	-webkit-transition: 0.2s all;
 	transition: 0.2s all;
 }
+
 
 .booking-form .submit-btn:hover,
 .booking-form .submit-btn:focus {

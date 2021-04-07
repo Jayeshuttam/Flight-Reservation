@@ -80,7 +80,6 @@ export default class MYFlights extends Component {
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="h5 mb-4 text-center">Flights</h3>
                             <div class="table-wrap" style={{ marginLeft: 0 }}>
                                 <table class="table">
                                     <thead class="thead-primary">

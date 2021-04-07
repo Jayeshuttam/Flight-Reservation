@@ -90,7 +90,7 @@ export default class Login extends Component {
       window.location.href = "/Home";
       //return <Redirect to='/Home' />;
     }
-    return (<div id="login-box" style={{ height: 340 }}>
+    return (<div id="login-box" style={{ height: 415 }}>
       <div className="left">
         <h1>Login </h1>
 
@@ -110,14 +110,6 @@ export default class Login extends Component {
         <a href="/ResetPassword">Forget Password?</a>
       </div>
 
-      <div className="right">
-        <span className="loginwith" style={{ marginBottom: -25 }}>Sign in with<br />social network</span>
-
-        <button className="social-signin facebook">Log in with facebook</button>
-        <button className="social-signin twitter">Log in with Twitter</button>
-        <button className="social-signin google">Log in with Google+</button>
-      </div>
-      <div className="or" style={{ top: 145 }}>OR</div>
     </div>)
   }
 }
