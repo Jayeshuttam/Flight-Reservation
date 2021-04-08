@@ -22,7 +22,7 @@ exports.login = function (req, res, next) {
         responseData.status = 401;
         reject(responseData);
       } else {
-        responseData.result_data = user;
+        responseData.results = user;
         responseData.first_name = user.first_name;
         responseData.last_name = user.last_Name;
         responseData.email = user.email;

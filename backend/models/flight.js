@@ -10,6 +10,10 @@ var flight_booking_schema = new Schema({
         required: true,
         reference: { type: mongoose.Schema.ObjectId, ref: User }
     },
+    payemntId: {
+        type: String,
+        required: true
+    },
     origin: {
         type: String,
         required: true

@@ -12,14 +12,14 @@ export default class Flights extends Component {
         this.state = {
             origin: '',
             destination: '',
-            flightType: '',
+            flightType: 'one-way',
             departureDate: '',
             returnDate: '',
-            numberOfAdults: '',
-            numberOfChildren: '',
-            travelClass: '',
+            numberOfAdults: 1,
+            numberOfChildren: 0,
+            travelClass: 'Economy',
             flightData: '',
-            tripType: false
+            tripType: 'false'
         };
 
         this.create = this.create.bind(this);
@@ -79,7 +79,11 @@ export default class Flights extends Component {
                         var return_at = new Date(flights[data].return_at)
                         var pstReturnAt = return_at.toLocaleString("en-US", { timeZone: "America/Los_Angeles" })
                         flights[data].return_at = pstReturnAt;
-                        flights[data].price = (this.state.numberOfAdults * flights[data].price) + (this.state.numberOfChildren * (flights[data].price / 2));
+                        flights[data].flightType = this.state.flightType;
+                        flights[data].numberOfAdults = this.state.numberOfAdults;
+                        flights[data].numberOfChildren = this.state.numberOfChildren;
+                        flights[data].travelClass = this.state.travelClass;
+                        flights[data].price = (parseInt(this.state.numberOfAdults) * parseInt(flights[data].price)) + (this.state.numberOfChildren * (flights[data].price / 2));
                         updatedFlightData.push(flights[data])
                     }
                 }
@@ -123,7 +127,7 @@ export default class Flights extends Component {
                                                 <span></span>Roundtrip
 									</label>
                                             <label for="one-way">
-                                                <input type="radio" value={this.state.tripType} onChange={(e) => this.handleChange({ tripType: true })} id="one-way" name="flight-type" required />
+                                                <input type="radio" checked="checked" value={this.state.tripType} onChange={(e) => this.handleChange({ tripType: true })} id="one-way" name="flight-type" required />
                                                 <span></span>One way
 									</label>
                                         </div>
@@ -174,9 +178,9 @@ export default class Flights extends Component {
                                                     value={this.state.numberOfAdults}
                                                     onChange={(e) => this.handleChange({ numberOfAdults: e.target.value })}
                                                 >
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
                                                 </select>
 
                                             </div>
@@ -188,9 +192,9 @@ export default class Flights extends Component {
                                                     value={this.state.numberOfChildren}
                                                     onChange={(e) => this.handleChange({ numberOfChildren: e.target.value })}
                                                 >
-                                                    <option>0</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
+                                                    <option value="0">0</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
                                                 </select>
 
                                             </div>
@@ -204,9 +208,9 @@ export default class Flights extends Component {
                                                     value={this.state.travelClass}
                                                     onChange={(e) => this.handleChange({ travelClass: e.target.value })}
                                                 >
-                                                    <option>Economy class</option>
-                                                    <option>Business class</option>
-                                                    <option>First class</option>
+                                                    <option value="Economy">Economy class</option>
+                                                    <option value="Business">Business class</option>
+                                                    <option value="First">First class</option>
                                                 </select>
                                             </div>
                                         </div>
