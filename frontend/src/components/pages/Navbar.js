@@ -55,9 +55,7 @@ function Navbar() {
                             <li className='nav-item'>
                                 <Link to='/flights' className='nav-links' onClick={closeMobileMenu}>Flight</Link>
                             </li>
-                            <li className='nav-item'>
-                                <Link to='/MyAccount' className='nav-links' onClick={closeMobileMenu}>My Account</Link>
-                            </li>
+                           
                             <li className='nav-item'>
                                 <Link to='/My-Bookings' className='nav-links' onClick={closeMobileMenu}>My Bookings</Link>
                             </li>
