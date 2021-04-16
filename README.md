@@ -16,7 +16,7 @@ Common Setup
 
 Clone the repo and install the dependencies.
 
-git clone https://github.com/contentful/the-example-app.nodejs.git
+git clone https://github.com/Jayeshuttam/Flight-Reservation.git
 cd backend
 
 npm install express express-session swagger-jsdoc@3.3.0 nodemailer bodyparser mongodb mongoose 
