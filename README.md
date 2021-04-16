@@ -3,7 +3,12 @@
 Flight Reservation is a flight Booking website.You can search for real time flights.
 It has the user authetication,and flight booking for registered users.
 
-This website is based on ReactJs,NodeJs and MongoDB.
+Technologies Used:
+1.React
+2.NodeJs
+3.MongoDb
+4.ExpressJs
+
 
 Requirements:
 
