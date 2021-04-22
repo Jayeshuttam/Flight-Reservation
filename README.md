@@ -3,21 +3,21 @@
 Flight Reservation is a flight Booking website.You can search for real time flights.
 It has the user authetication,and flight booking for registered users.
 
-Technologies Used:
+<h2>Technologies Used:</h2>
 1.React
 2.NodeJs
 3.MongoDb
 4.ExpressJs
 
 
-Requirements:
+<h2>Requirements:</h2>
 
-1.NodeJs installed
+<b>1.NodeJs installed
 
-2.Visual studio code or any IDE for web development
+2.Visual studio code or any IDE for web development</b>
 
 
-Common Setup
+<h2>Common Setup</h2>
 
 Clone the repo and install the dependencies.
 
