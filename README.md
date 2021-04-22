@@ -19,33 +19,34 @@ It has the user authetication,and flight booking for registered users.
 
 <h2>Common Setup</h2>
 
-Clone the repo and install the dependencies.
+Clone the repo and install the dependencies through terminal.
+<ol>
 
-git clone https://github.com/Jayeshuttam/Flight-Reservation.git
+<li>git clone https://github.com/Jayeshuttam/Flight-Reservation.git
 
 To start the backend nodeJs server,execute following steps:-
 
-cd backend
+<li>cd backend
 
 In your terminal use following command to install all the dependencies:-
 
-npm install nodemailer express swagger-jsdoc@3.3.0 body-parser axios querystring cors path crypto bcrypt mongoose mongodb swagger-ui-express prop-types url express-session
+<li>npm install nodemailer express swagger-jsdoc@3.3.0 body-parser axios querystring cors path crypto bcrypt mongoose mongodb swagger-ui-express prop-types url express-session</li>
 
 when finished start the server by -  
 
-node server.js
+<li>node server.js</li>
 
 To start the frontend .i.e React
 
-Start new terminal:
+<li>Start new terminal:</li>
 
-cd frontend
+<li>cd frontend</li>
 
-npm install
+<li>npm install</li>
 
-npm install react-icons
+<li>npm install react-icons</li>
 
-npm start
+<li>npm start</li>
 
 now you good to go
 
